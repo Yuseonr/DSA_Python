@@ -1,0 +1,90 @@
+2/Aug/2025
+Math
+
+--------------------------------L1 : Exponents --------------------------------
+
+Exponent Syntax
+The ** operator calculates an exponent in Python. (Why not the ^ operator? Blame Fortran.)
+
+--------------------------------L5 : Non Linier Growth --------------------------------
+
+Exponents are important to understand when it comes to the execution speed of an algorithm. 
+If the number of operations grows quickly as the amount of input data increases, the algorithm will become slower and slower.
+
+The doubling formula, 2*x, results in linear or straight growth.
+The quadratic formula, x^2, keeps growing faster and faster.
+
+What Does This Have to Do With Code?
+Generally we try to avoid writing code that causes the usage of a resource to grow quadratically (with an exponent).
+
+Sometimes that's a lot of computations (CPU utilization / slowness).
+Sometimes that's a lot of memory usage (RAM utilization)
+Sometimes that's a large storage requirement (disk space)
+A notable exception is in cryptography and security: we want to force attackers to waste resources trying to get at our information.
+
+--------------------------------L7 : Logarithms --------------------------------
+
+Logarithms
+A logarithm is the inverse of an exponent.
+
+2^4 = 16
+
+log2 16 = 4
+
+"log2 16" can be read as "log base 2 of 16", and means "the number of times 2 must be multiplied by itself to equal 16".
+
+"log2 16" might also be written as log2(16)
+
+Python Syntax
+There isn't a language-level operator to calculate a logarithm, but we can import the math library and use the math.log() function.
+
+import math
+
+print(f"Logarithm base 2 of 16 is: {math.log(16, 2)}")
+# Logarithm base 2 of 16 is: 4.0
+
+--------------------------------L8, L9 : Log Quiz --------------------------------
+
+Exponents grow very quickly, and logarithms grow very slowly. A logarithm is the inverse of an exponent.
+
+Generally speaking, it's nice when we can write code that uses log(n) time to run, where n is the amount of data to process. For example, let's say we have a list of 1,000,000 users, and we want to write an algorithm that finds the user with the most followers.
+
+If it takes 1 millisecond to check one user (let's just pretend), a linear algorithm would take 1,000,000 milliseconds, or about 16 minutes and 40 seconds.
+
+A quadratic algorithm (exponent) would take 1,000,000,000,000 milliseconds, or about 31.7 years.
+
+However, a logarithmic algorithm would only take 20 milliseconds! Here's a table to illustrate the difference:
+
+Input Size	Linear (n*2)	Quadratic (n^2)	Log (log2(n))
+10	20 ms	100 ms	3 ms
+100	200 ms	10,000 ms	7 ms
+1,000	2,000 ms	1,000,000 ms	10 ms
+10,000	20,000 ms	100,000,000 ms	14 ms
+100,000	200,000 ms	10,000,000,000 ms	17 ms
+1,000,000	2,000,000 ms	1,000,000,000,000 ms	20 ms
+
+--------------------------------L11 : Factorials --------------------------------
+
+The factorial of a positive integer n, written n!, is the product of all positive integers less than and equal to n.
+
+5! = 5 * 4 * 3 * 2 * 1 = 120
+
+The results of a factorial grow even faster than exponentiation!
+
+n! grows faster than 2^n
+
+Factorials are useful whenever you're trying to count how many ways a collection can be ordered. For example, how many different ways can a deck of cards be arranged?
+
+The first card could be any of the 52 cards.
+The second card can be any of the 51 remaining cards.
+The third card can be any of the 50 remaining cards, and so on.
+That means the total number of possibilities is the 52 options multiplied by 51 options multiplied then by 50 options, and so on.
+
+--------------------------------L14 : Exponential Decay --------------------------------
+
+In physics, exponential decay is a process where a quantity decreases over time at a rate proportional to its current value.
+
+--------------------------------L15 : Log Scale--------------------------------
+
+In some cases, data can span several orders of magnitude, making it difficult to visualize on a linear scale. 
+A logarithmic scale can help by compressing the data so that it's easier to understand.
