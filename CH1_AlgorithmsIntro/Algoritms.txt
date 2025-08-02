@@ -1,0 +1,43 @@
+2/Aug/2025
+Algorithms intro
+
+--------------------------------L1 : Welcome to Data Structures --------------------------------
+
+What Is a Data Structure?
+Data structures are just organizational tools that allow for more advanced algorithms.
+What Is an Algorithm?
+An "algorithm" is just a set of instructions that can be carried out to solve a problem.
+
+--------------------------------L2 :  Find Minimum --------------------------------
+
+Set minimum to positive infinity: float("inf").
+If the list is empty, return None.
+For each number in the list nums, compare it to minimum. If the number is smaller than minimum, set minimum to that number.
+minimum is now set to the smallest number in the list. Return it.
+
+--------------------------------L3, L4 : What is an Algorithms? --------------------------------
+
+in the context of computer science, an algorithm is a finite sequence of well-defined, computer-implementable instructions. 
+In short, an algorithm is:
+
+Defined: there is a specific sequence of steps that performs a task
+Unambiguous: there is a "correct" and "incorrect" interpretation of the steps
+Implementable: it can be executed using software and hardware
+
+n the context of computer science, an algorithm is a finite sequence of well-defined, computer-implementable instructions. In short, an algorithm is:
+
+Defined: there is a specific sequence of steps that performs a task
+Unambiguous: there is a "correct" and "incorrect" interpretation of the steps
+Implementable: it can be executed using software and hardware
+
+--------------------------------L5 : Simple Algorithms--------------------------------
+
+Algorithms, like anything else, can be understood by breaking them down piece by piece. 
+
+Take a look at the following algorithm for adding two numbers--it's dead simple:
+Start with input variables a and b
+Add a and b using the + operator, and assign the result to a new variable, sum
+Return the sum variable
+
+--------------------------------L6 : Avarage --------------------------------
+

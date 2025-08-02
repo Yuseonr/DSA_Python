@@ -1,1 +1,1 @@
-# Learning Data Stucture and Algoritms using Python
+# Learning Data Stucture and Algorithms using Python
