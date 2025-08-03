@@ -1,0 +1,91 @@
+2/Aug/2025
+Big-O Analysis
+
+--------------------------------L1 : Big O Notations --------------------------------
+
+"Big O" analysis (pronounced "Big Oh", not "Big Zero") is one way to compare the practicality of algorithms 
+by classifying their time complexity.
+
+Big O is a characterization of algorithms according to their worst-case growth rates
+We write Big-O notation like this:
+
+O(formula)
+
+O(1) - constant
+O(log n) - logarithmic
+O(n) - linear
+O(n^2) - squared
+O(2^n) - exponential
+O(n!) - factorial
+
+As the size of inputs grows, the algorithms become slower to complete (take longer to run). The rate at which they become slower is defined by their Big O category.
+
+For example, O(n) algorithms slow down more slowly than O(n^2) algorithms.
+
+--------------------------------L2 : O(n) --------------------------------
+
+O(n) - Order “n”
+O(n) is very common - When the number of steps in an algorithm grows at the same rate as its input size, it's classified as O(n)
+
+--------------------------------L3 : O(n^2) --------------------------------
+
+O(n^2) grows in complexity much more rapidly. That said, for small and medium input sizes, these algorithms can still be very useful.
+A common reason an algorithm falls into O(n^2) is by using a nested loop, 
+where the number of iterations of each loop is equal to the number of items in the input:
+
+for person_one in persons:
+    for person_two in persons:
+        # every combination of people
+        # will go on a date... twice!
+        go_on_date(person_one, person_two)
+
+
+--------------------------------L6 : O(nm) --------------------------------
+
+O(nm) is very similar to O(n^2), but instead of a single input that we care about, there are two. 
+If n and m increase at the same rate, then O(nm) is effectively the same as O(n^2). 
+However, if n or m increases faster or slower, then it's useful to track their complexity separately.
+
+--------------------------------L7 : Constants doesnt matter--------------------------------
+
+Big-O notation only describes the theoretical growth rate of algorithms. 
+It doesn't deal with the actual time an algorithm takes to run on a given machine.
+
+For example, take a look at the following functions:
+
+def print_names_once(names):
+    for name in names:
+        print(name)
+
+def print_names_twice(names):
+    for name in names:
+        print(name)
+    for name in names:
+        print(name)
+
+As you would expect, print_names_once will take half the time to run as print_names_twice. 
+And in the real world of software engineering, cutting speed in half is awesome. 
+The funny thing about Big O analysis is that we don't care. We're academics™.
+
+Both of the functions above have the same rate of growth, O(n). 
+You might be tempted to say, "print_names_twice should be O(2 * n)" but you would be missing the whole point of Big O.
+
+In Big O analysis we drop all constants because while they affect the runtime, they don't affect the change in the runtime.
+
+--------------------------------L11 : Order 1 --------------------------------
+
+O(1) means that no matter the size of the input, there is no growth in the runtime of the algorithm. This is also referred to as a "constant time" algorithm.
+
+In Python, a dictionary offers the ability to look items up by key, which is an operation that is independent of the size of the dictionary:
+
+# this is a constant time lookup
+org = organizations[org_id]
+
+Dictionary lookups are O(1). Which is one of the reasons dictionaries and dictionary-equivalents in other languages are used all over the place.
+
+--------------------------------L12 : Order Log N --------------------------------
+
+O(log(n)) algorithms are only slightly slower than O(1), but much faster than O(n). They do grow according to the input size, n, but only according to the log of the input.
+
+
+
