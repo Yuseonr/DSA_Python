@@ -1,0 +1,168 @@
+4/aug/2025
+Sorting Algorithms
+
+--------------------------------L1 : Sorting Algorithms --------------------------------
+
+most programming languages provide their own standard sorting implementation. 
+In Python, for example, we can use the sorted function:
+
+items = [1, 5, 3]
+print(sorted(items)) # [1, 3, 5]
+
+--------------------------------L2 : Bubble sort --------------------------------
+
+Set swapping to True
+Set end to the length of the input list
+While swapping is True:
+Set swapping to False
+For i from the 2nd element to end:
+If the (i-1)th element of the input list is greater than the ith element:
+Swap the (i-1)th element and the ith element
+Set swapping to True
+Decrement end by one
+Return the sorted list
+
+--------------------------------L3 : Bubble sort big O --------------------------------
+
+Best and Worst Case
+Sometimes it's useful to know how the algorithm will perform based on what the input data is instead of just how much data there is. In the case of bubble sort (and many other algorithms), the best and worst case scenarios can actually change the time complexity.
+
+Best case: If the data is pre-sorted, bubble sort becomes really fast. Can you see why?
+Worst case: If the data is in reverse order, bubble sort becomes really slow (but still in the same complexity class as random data). Can you see why?
+
+--------------------------------L5 : Why Buble Sort--------------------------------
+
+ubble sort is famous for how easy it is to write and understand.
+
+--------------------------------L6 : Merge Sort--------------------------------
+
+Merge sort is a recursive sorting algorithm and it's quite a bit faster than bubble sort. 
+It's a divide and conquer algorithm.:
+
+Divide: divide the large problem into smaller problems, and recursively solve the smaller problems
+Conquer: Combine the results of the smaller problems to solve the large problem
+
+In merge sort we:
+
+Divide the array into two (equal) halves (divide)
+Recursively sort the two halves
+Merge the two halves to form a sorted array (conquer)
+
+--------------------------------L8 : Why Merge Sort --------------------------------
+
+Why Merge Sort?
+Pros:
+
+Fast: Merge sort is much faster than bubble sort. O(n*log(n)) instead of O(n^2).
+Stable: Merge sort is a stable sort which means that values with duplicate keys in the original list will be in the same order in the sorted list.
+Cons:
+
+Memory usage: Most sorting algorithms can be performed using a single copy of the original array. Merge sort requires extra subarrays in memory.
+Recursive: Merge sort requires many recursive function calls, and in many languages (like Python), this can incur a performance penalty.
+
+--------------------------------L10 : Insertion Sort--------------------------------
+
+nsertion sort builds a sorted list one item at a time. 
+It's much less efficient on large lists than merge sort because it's O(n^2), 
+but it's actually faster (not in Big O terms, but due to smaller constants) than merge sort on small lists.
+
+For each index in the input list:
+Set a j variable to the current index
+While j is greater than 0 and the element at index j-1 is greater than the element at index j:
+Swap the elements at indices j and j-1
+Decrement j by 1
+Return the list
+
+--------------------------------L11 : Insertion Sort Big O --------------------------------
+
+Best case: If the data is pre-sorted, insertion sort becomes really fast. Can you see why?
+Average case: The average case is O(n^2) because the inner loop will execute about half of the time.
+Worst case: If the data is in reverse order, it's still O(n^2) and the inner loop will execute every time.
+
+--------------------------------L13 : Why use it --------------------------------
+
+Why Use Insertion Sort?
+Fast: for very small data sets (even faster than merge sort and quick sort, which we'll cover later)
+Adaptive: Faster for partially sorted data sets
+Stable: Does not change the relative order of elements with equal keys
+In-Place: Only requires a constant amount of memory
+Inline: Can sort a list as it receives it
+Why Is Insertion Sort Fast for Small Lists?
+Many production sorting implementations use insertion sort for very small inputs under a certain threshold (very small, like 10-ish), and switch to something like quicksort for larger inputs. They use insertion sort because:
+
+There is no recursion overhead
+It has a tiny memory footprint
+It's a stable sort as described above
+
+--------------------------------L15 : quick Sort --------------------------------
+
+Quick sort is an efficient sorting algorithm that's widely used in production sorting implementations. Like merge sort, quick sort is a recursive divide and conquer algorithm.
+
+Divide:
+
+Select a pivot element that will preferably end up close to the center of the sorted pack
+Move everything onto the "greater than" or "less than" side of the pivot
+The pivot is now in its final position
+Recursively repeat the operation on both sides of the pivot
+Conquer:
+
+The array is sorted after all elements have been through the pivot operation
+
+Pseudocode
+Select a "pivot" element - We'll arbitrarily choose the last element in the list
+Move through all the elements in the list and swap them around until all the numbers less than the pivot are on the left, and the numbers greater than the pivot are on the right
+Move the pivot between the two sections where it belongs
+Recursively repeat for both sections
+
+--------------------------------L16 : Quick Sort Big O --------------------------------
+
+On average, quicksort has a Big O of O(n*log(n)). In the worst case, and assuming we don't take any steps to protect ourselves, 
+it can degrade to O(n^2). partition() has a single for-loop that ranges from the lowest index to the highest index in the array. 
+By itself, the partition() function is O(n). The overall complexity of quicksort is dependent on how many times partition() is called.
+
+--------------------------------L18 : Fixing quicksort--------------------------------
+
+Fixing Quick Sort
+While the version of quicksort that we implemented is almost always able to perform at speeds of O(n*log(n)), its Big O is still technically O(n^2) due to the worst-case scenario. We can fix this by altering the algorithm slightly.
+
+Two of the approaches are:
+
+Shuffle input randomly before sorting. This can trivially be done in O(n) time.
+Actively find the median of a sample of data from the partition, this can be done in O(1) time.
+Random Approach
+The random approach is easier to code, which is nice if you're the one writing the code.
+
+The function simply shuffles the list into random order before sorting it, which is an O(n) operation. The likelihood of shuffling a large list into sorted order is so low that it's not worth considering.
+
+Median Approach
+Another popular solution is to use the "median of three" approach. Three elements (for example: the first, middle, and last elements) of each partition are chosen and the median is found between them. That item is then used as the pivot.
+
+This approach has less overhead, and also doesn't require randomness to be injected into the function, meaning it can remain deterministic and pure.
+
+--------------------------------L20 : Why QS--------------------------------
+
+Why Use Quick Sort?
+Pros:
+
+Very fast: At least it is in the average case
+In-Place: Saves on memory, doesn't need to do a lot of copying and allocating
+Cons:
+
+Typically unstable: changes the relative order of elements with equal keys
+Recursive: can incur a performance penalty in some implementations
+Pivot sensitivity: if the pivot is poorly chosen, it can lead to poor performance
+
+--------------------------------L22 : Selection Sort --------------------------------
+
+Another sorting algorithm we never covered in-depth is called "selection sort". It's similar to bubble sort in that it works by repeatedly swapping items in a list. However, it's slightly more efficient than bubble sort because it only makes one swap per iteration.
+
+Selection sort pseudocode:
+
+For each index:
+Set smallest_idx to the current index
+For each index from i + 1 to the end of the list:
+If the number at the inner index is smaller than the number at smallest_idx, set smallest_idx to the inner index
+Swap the number at the outer loop index with the number at smallest_idx
+Return the sorted list
+A
+
