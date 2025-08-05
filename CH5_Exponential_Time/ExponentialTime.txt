@@ -1,0 +1,83 @@
+5 Aug 2025
+Exponential Time
+
+--------------------------------L1 : Polynomial vs Exponential --------------------------------
+
+algorithms can be classified into two categories:
+"Polynomial time"
+"Exponential time"
+
+An algorithm runs in "Polynomial time" if its runtime does not grow faster than n^k, 
+where k is any constant (e.g. n^2, n^3, etc) and n is the size of the input.
+
+--------------------------------L2 : PlyTime = P --------------------------------
+
+Polynomial Time = P
+Problems that fall into class P are practical to solve on computers.
+Problems that don't fall into P are hard, slow, and impractical.
+
+--------------------------------L3 : Reduction to P --------------------------------
+
+The Fibonacci sequence is a sequence of numbers where each number is the sum of the two numbers before it. Like this:
+
+0, 1, 1, 2, 3, 5, 8, 13, 21, 34, ...
+
+if we try to compute it recursivly it will take O(n^2) time complexity, so its better to use other methodes like hashmap or use 
+
+def fib(n):
+    if n <= 1:
+        return n 
+    grand_parent = 0
+    parent = 1
+    current = 0
+    for i in range (n-1):
+        current = grand_parent+parent
+        grand_parent = parent
+        parent = current
+    return current
+
+
+--------------------------------L4 : Order 2^N Exponential --------------------------------
+
+Algorithms that grow at an exponential rate become impossible to compute after so few iterations that they are almost worthless in practicality.
+
+If the input list is empty, return a list containing an empty list. (The power set of an empty collection contains just the empty set)
+Otherwise, create a list named all_subsets that initially contains an empty list. This will hold the final collection of subsets.
+For each element in the input list:
+Create a new empty list named subsets_with_element. This will hold the new subsets that include the current element.
+Iterate over each subset in your main collection (all_subsets):
+Create a new subset by adding the current element to the existing subset.
+Append this new subset to the subsets_with_element.
+Extend all_subsets with your newly created subsets_with_element.
+Return all_subsets.
+
+--------------------------------L5 : Big O Categories Review--------------------------------
+
++---------+--------------+---------------------------+---------------------------------------------------------------+
+| Big-O   | Name         | Description               | Example                                                       |
++---------+--------------+---------------------------+---------------------------------------------------------------+
+| O(1)    | constant     | Best                      | Looking up an item in a list by index                         |
+|         |              | Always takes same time    |                                                               |
++---------+--------------+---------------------------+---------------------------------------------------------------+
+| O(log n)| logarithmic  | Great                     | Binary search                                                 |
+|         |              | Cuts problem in half      |                                                               |
++---------+--------------+---------------------------+---------------------------------------------------------------+
+| O(n)    | linear       | Good                      | Unsorted array search                                         |
+|         |              | Work grows with input     |                                                               |
++---------+--------------+---------------------------+---------------------------------------------------------------+
+| O(n log n)| linearithmic| Okay                     | Merge sort, heap sort                                         |
+|          |             | Slightly worse than linear|                                                               |
++---------+--------------+---------------------------+---------------------------------------------------------------+
+| O(n^2)  | quadratic    | Slow                      | Nested loop for all ordered pairs                             |
+|         |              | Work = n squared          |                                                               |
++---------+--------------+---------------------------+---------------------------------------------------------------+
+| O(n^3)  | cubic        | Slower                    | Triple nested loop for ordered triples                        |
+|         |              | Work = n cubed            |                                                               |
++---------+--------------+---------------------------+---------------------------------------------------------------+
+| O(2^n)  | exponential  | Horrible                  | Brute-force all combinations of coin flips                    |
+|         |              | Doubles with every input  |                                                               |
++---------+--------------+---------------------------+---------------------------------------------------------------+
+| O(n!)   | factorial    | Even More Horrible        | Generating all permutations of a list                         |
+|         |              | Grows faster than anything|                                                               |
++---------+--------------+---------------------------+---------------------------------------------------------------+
+
