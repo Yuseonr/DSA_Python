@@ -1,0 +1,33 @@
+# 6 Aug 2025
+# Stacks
+
+--------------------------------L1 : Stacks--------------------------------
+
+A stack is a data structure that stores ordered items. It's like a list, but its design is more restrictive. 
+It only allows items to be added or removed from the top of the stack:
+Imagine a stack of plates: it's easy to take an item off the top of the stack, 
+but you can't really get to the items in the middle or at the bottom without removing the items on top first.
+
+stack referred to as a LIFO (last in, first out) data structure.
+
+--------------------------------L2 : Stacks Speed--------------------------------
+
++-----------+--------+-------------------------------------------------------------+
+| Operation | Big O  | Description                                                 |
++-----------+--------+-------------------------------------------------------------+
+| push      | O(1)   | Add an item to the top of the stack                         |
+| pop       | O(1)   | Remove and return the top item from the stack               |
+| peek      | O(1)   | Return the top item from the stack without modifying it     |
+| size      | O(1)   | Return the number of items currently in the stack           |
++-----------+--------+-------------------------------------------------------------+
+
+--------------------------------L5 : Stack Review--------------------------------
+
+Stacks are often used in the real world for:
+Function call management
+Undo/redo functionality
+Expression evaluation
+Browser history
+
+--------------------------------L7 : Using Stack--------------------------------
+
