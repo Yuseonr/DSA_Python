@@ -1,0 +1,144 @@
+7 Aug 2025
+Lingked Lists
+
+--------------------------------L1 : Lingked List --------------------------------
+
+A linked list is where elements are not stored next to each other in memory, instead, each item references the next in a chain.
+
++---------+      +---------+      +---------+      +----------+
+| val: 273|      | val: 684|      | val: 159|      | val: None|
+|         |      |         |      |         |      |          |
+| ref ----+----> | ref ----+----> | ref ----+----> | ref: None|
++---------+      +---------+      +---------+      +----------+
+   Node1           Node2            Node3            End
+
+
+--------------------------------L2 : Lingked List Vs List --------------------------------
+
+A linked list is a collection of ordered items, so it's similar to a "normal" list also called an "array" or "slice"
+Items in a "normal" list are stored next to each other in memory, and to get an item from a normal List we have to use a numbered index:
+
+car = cars[3]
+
+With a normal list, all the data is stored in the same place in memory and the index is just a way to find the right spot
+
+In a linked list, there are no indexes! Each node contains two things: 
+the data itself, and a reference to the next node in the list. 
+Iterating over a linked list requires starting at the head node and following the next references until you reach the end.
+
+linked lists can be annoying to use and incur more overhead, so why use a linked list at all? 
+It's because sometimes linked lists are much faster to make updates to, particularly when inserting or deleting items from the middle.
+
+In a normal list, if you insert an item in the middle, you have to shift all the items after it down one spot, which takes O(n)
+In a linked list, once you've traversed to a given node, insertion is (O(1)) because you can simply update two references:
+
+Before insertion:
++------+     +------+     +------+     +------+
+| val: |     | val: |     | val: |     | val: |
+|  10  | --> |  20  | --> |  30  | --> |  40  |
+| ref: |     | ref: |     | ref: |     | ref: |
++------+     +------+     +------+     +------+
+
+Insert 99 between 20 and 30 (just update refs):
+
++------+     +------+     +------+     +------+
+| val: |     | val: |     | val: |     | val: |
+|  10  | --> |  20  | --> |  99  | --> |  30  | --> [40...]
+| ref: |     | ref: |     | ref: |     | ref: |
++------+     +------+     +------+     +------+
+
+Only two `ref` fields updated → O(1)
+
+--------------------------------L4 : Iterating --------------------------------
+
+iterating with linked lists kinda sucks compared to the simplicity of arrays (normal lists)
+
+The yield Keyword
+The yield keyword in Python returns a value, kind of like return. However, it's used to turn the function into a generator function.
+A generator function creates a new function object. When that function is called, it executes the code in the generator function until it hits a yield statement. 
+At that point, the function pauses and returns the value of the yield statement. The next time the function is called, it picks up right where it left off.
+
+def create_message_generator():
+    yield "hi"
+    yield "there"
+    yield "friend"
+
+gen = create_message_generator()
+first = next(gen)
+print(first)  # prints: hi
+second = next(gen)
+print(second)  # prints: there
+third = next(gen)
+print(third)  # prints: friend
+
+Every time you call create_message_generator(), it creates a new generator instance. 
+To continue from where you left off, you need to assign this generator to a variable (like gen in the example above). 
+This way, when you use next() or loop over the generator, you’re continuing with the same instance rather than starting a new one
+
+def __iter__(self):
+        pass
+
+By overriding the __iter__ method, Python will allow us to use a for loop to iterate over the linked list:
+
+ll = LinkedList()
+ll.add("first")
+ll.add("second")
+ll.add("third")
+for val in ll:
+    print(val)
+
+--------------------------------L5 : Add to tail --------------------------------
+
+def add_to_tail(self, node):
+        if self.head == None : 
+            self.head = node 
+            return
+        else :
+            last_node = None
+            for cur_node in self:
+                last_node = cur_node
+            last_node.set_next(node) 
+
+--------------------------------L6 : Add to head--------------------------------
+
+def add_to_head(self, node):
+        node.set_next(self.head)
+        self.head = node
+
+--------------------------------L7 : Lingked Lists Queues --------------------------------
+
+To use our Linked List as a fast queue (O(1) pushes and pops) we need our add_to_tail function to be O(1)
+Currently, it iterates over the entire list before appending an item. We can fix this by keeping track of the last item with a new data member: tail.
+
+def add_to_head(self, node):
+        node.set_next(self.head)
+        self.head = node
+        if not self.tail :
+            self.tail = node
+
+    def add_to_tail(self, node):
+        if not self.head and not self.tail:
+            self.head = node
+            self.tail = node
+            return
+        self.tail.set_next(node)
+        self.tail = node
+
+--------------------------------L8 : Remove from head --------------------------------
+
+We're one method away from having a fully functioning O(1) Queue! We just need a way to remove the first element from the linked list in constant time. When we're finished, our LinkedList will fulfill the basic requirements of a Queue:
+
+add_to_tail: Constant time insert
+remove_from_head: Constant time pop
+
+--------------------------------L9 : LLQ QUIZ--------------------------------
+
+The problem with our array (normal Python list) implementation of a queue was that it had O(n) push operations.
+The linked list implementation of a queue has O(1) push operations.
+Linked lists are usually a worse choice than standard arrays because:
+They are less performant due to more memory overhead
+They are more complex to work with, debug, and reason about
+They have no random access (indexing to a specific element)
+Doubly linked lists are a better choice than arrays in very specific circumstances because they have O(1) insertions and deletions at both ends of the list.
+
+
