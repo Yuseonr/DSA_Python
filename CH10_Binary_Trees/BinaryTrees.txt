@@ -1,0 +1,166 @@
+9 Aug 2025
+Binary Trees
+
+--------------------------------L1 : Trees --------------------------------
+
+    5
+   / \
+  3   5
+ /   / \
+3   2   5
+
+Trees are kind of like linked lists in the sense that the root node simply holds references to its child nodes, 
+which in turn hold references to their children, but Tree's nodes can have multiple children instead of just one.
+A generic tree structure has the following rules:
+
+Each node has a value and may have a list of "children"
+Children can only have a single "parent"
+
+Linked lists
+node -> node -> node
+
+
+Tree
+            > node
+      > node
+            > node
+            > node
+> node
+            > node
+            > node
+            > node
+      > node
+            > node
+
+--------------------------------L3 : Binary Tree --------------------------------
+
+Binary Search Tree or BST. A BST has some additional constraints:
+
+Instead of an unbounded list of children, each node has at most 2 children
+The left child's value must be less than its parent's value
+The right child's value must be greater than its parent's value
+No two nodes in the BST can have the same value
+
+By ordering the tree like this, we'll be able to add, remove, find, and update nodes much more quickly.
+
+--------------------------------L6 : Insert Review --------------------------------
+
+inserting into a binary search tree (like most of its operations) is very fast. 
+Picture the algorithm that you just wrote in your head: how many comparisons does it take to find the right spot for a new node?
+It only requires one comparison for each level of the tree, making it O(log(n))! 
+(At least in a balanced tree, we'll talk about this later).
+
+Order log(n) is very fast - it's practically as good as O(1) in most cases. 
+If our tree has 1,000,000 nodes, we only need to make 20 comparisons to find the right spot for a new node. 
+If our tree is 2x larger (2,000,000 nodes), we only need to make one more comparison per insert, 21 total.
+
+--------------------------------L7 : Min and Max --------------------------------
+
+Some of the simpler BST algorithms are the get_min and get_max methods.
+
+--------------------------------L8 : Delete --------------------------------
+
+class BSTNode:
+    def delete(self, val):
+        current = self
+        if current.val is None : return None
+
+        if val < current.val :
+            if current.left :
+               current.left = current.left.delete(val)
+            return current
+        
+        if val > current.val :
+            if current.right :
+                current.right = current.right.delete(val)
+            return current
+        
+        if val == current.val :
+            if current.right is None :
+                return current.left
+            
+            if current.left is None :
+                return current.right
+            
+            curr_right_oleft = current.right
+            while curr_right_oleft.left is not None :
+                curr_right_oleft = curr_right_oleft.left
+
+            current.val = curr_right_oleft.val
+
+            current.right = current.right.delete(curr_right_oleft.val)
+
+            return current
+
+--------------------------------L9 : Deletion Review --------------------------------
+
+The delete method is O(log(n)) because, like most binary tree operations, we don't have to search the entire tree. 
+We only have to search one path from the root to the leaf node we want to delete.
+
+--------------------------------L11 : Preorder Traversal --------------------------------
+
+A "preorder" traversal is a way to visit all the nodes in a tree. It's called "preorder" because the current node is visited before its children. This tree:
+
+    > 7
+        > 6
+> 4
+    > 2
+        > 1
+
+Would be traversed in this order:
+
+[4, 2, 1, 7, 6]
+
+Visit the value of the current node by appending its value to the visited array
+Recursively traverse the left subtree
+Recursively traverse the right subtree
+Return the array of visited nodes
+
+--------------------------------L12 : Post order Traversal --------------------------------
+
+A "postorder" traversal also visits all the nodes in a tree. It's called "postorder" because the current node is visited after its children. The following tree:
+
+    > 7
+        > 6
+> 4
+    > 2
+        > 1
+
+Would be visited in this order:
+
+[1, 2, 6, 7, 4]
+
+--------------------------------L13 : In Order Traversal --------------------------------
+
+An "inorder" traversal is the most intuitive way to visit all the nodes in a tree. It's called "inorder" because the current node is visited between its children. It results in an ordered list of the nodes in the tree. The following tree:
+
+    > 7
+        > 6
+> 4
+    > 2
+        > 1
+
+Would be visited in this order:
+
+[1, 2, 4, 6, 7]
+
+--------------------------------L14 : Node Exist --------------------------------
+
+class BSTNode:
+    def exists(self, val):
+        if val == self.val :
+            return True
+        if self.right or self.left :
+            if val < self.val :
+                return self.left.exists(val)
+            else :
+                return self.right.exists(val)
+        return False
+
+--------------------------------L15 : Height --------------------------------
+
+ > Elrond#3
+> Elian#2
+    > Astram#1
+
+Has a height of 2 because the longest path from the root node to a leaf node is 2 nodes long.
