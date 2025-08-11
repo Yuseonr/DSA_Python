@@ -1,0 +1,61 @@
+11 Aug 2025
+Hashmaps
+
+--------------------------------L1 : Hashmaps --------------------------------
+
+A hash map or "hash table" is a data structure that maps keys to values:
+
+"bob" -> "ross"
+"pablo" -> "picasso"
+"leonardo" -> "davinci"
+
+The lookup, insertion, and deletion operations of a hashmap have an average computational cost of O(1). 
+Assuming you know the key, nothing beats a hashmap! 
+A Python dictionary is an example of a hashmap.
+
+Under the Hood
+
+Hashmaps are built on top of arrays (or in the case of ours, a Python list). 
+They use a hash function to convert a "hashable" key into an index in the array. 
+
+hash function:
+
+Takes a key and returns an integer.
+Always returns the same integer for the same key.
+Always returns a valid index in the array (e.g. not negative, and not greater than the array size)
+
+hash collisions where the hash function generates the same index for more than one key.
+
+--------------------------------L4 : Hash Function --------------------------------
+
+Take a key (string) as input
+Calculate the sum of the Unicode values of all the characters in the string using Python's ord function
+Mod (%) the sum by the size of the hashmap to get an index which should be an int
+Return the index
+
+--------------------------------L5 : Insert --------------------------------
+
+Convert the incoming key to the appropriate storage index using your existing hash function
+Create a key-value pair as a tuple
+Store the tuple at the calculated index in the underlying array
+
+--------------------------------L6 : Get --------------------------------
+
+It takes a key (a string) and returns the value stored at that location (not the whole key/value tuple).
+
+Use the key_to_index method to find the correct index to look up in the self.hashmap datastore, and if a value doesn't exist at that index, raise the following Exception to indicate no key was found.
+
+raise Exception("sorry, key not found")
+
+--------------------------------L7 : Hashmaps review --------------------------------
+
+Properties of a Good Hash Map
+Fast Lookups: Hashmaps have an average time complexity of O(1) for lookups, insertions, and deletions.
+Unordered: Hashmaps (typically) do not guarantee any particular order of keys.
+No Ranging: While hashmaps are great for lookups, they don't provide the ability to look into a range of keys (e.g. the largest ten keys). That's one reason production databases like Postgres use binary trees for indexing.
+Collision Resistant: Hashmaps are built on top of arrays and use a hash function to convert a key into an index. Production-ready implementations (like Python dictionaries) handle hash collisions and make them a non-issue in practice.
+Hashable Keys: Keys must be hashable. This means they must be immutable and have a consistent hash value. For example, in Python, a tuple can be a key, but a list cannot.
+Efficient Resizing: When a hashmap's capacity is exceeded, it dynamically resizes (usually by doubling in size) and rehashes the elements. A good hashmap manages this resizing efficiently, minimizing performance hits.
+Uniform Distribution: A good hash function ensures keys are distributed evenly across the hashmap's underlying array, minimizing the number of collisions and optimizing lookup speed.
+
+--------------------------------L10 : Linear probing --------------------------------
