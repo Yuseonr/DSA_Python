@@ -1,0 +1,83 @@
+ 13 Aug 2025
+ Tries
+
+--------------------------------L1 : Tries --------------------------------
+
+In Python, a trie is easily implemented as a nested tree of dictionaries 
+where each key is a character that maps to the next character in a word. 
+
+the words:
+
+hello
+help
+hi
+Would be represented as:
+
+{
+	"h": {
+		"e": {
+			"l": {
+				"l": {
+					"o": {
+						"*": True
+					}
+				},
+				"p": {
+					"*": True
+				}
+			}
+		},
+		"i": {
+			"*": True
+		}
+	}
+}
+
+* character (paired with True instead of a dictionary) is used to indicate the end of a word.
+
+
+--------------------------------L3 : Prefix Matching --------------------------------
+
+Tries tend to be most useful for prefix matching. 
+For example, if you wanted to find all the words in a dictionary that start with a given prefix, a trie works great! 
+Autocomplete, keyword search, and spellcheck are all good examples of where a trie can be useful.
+
+Remember, a hash table is only good for exact matches, whereas a trie allows you to look up all of the words that match a given prefix
+
+--------------------------------L5 : Words with Prefix --------------------------------
+
+def search_level(self, current_level, current_prefix, words):
+        if self.end_symbol in current_level : words.append(current_prefix)
+        for char in sorted(current_level) :
+            if char is not self.end_symbol :
+                extend_current_prefix =  current_prefix + char
+                self.search_level(current_level[char],extend_current_prefix,words)
+        return words
+
+
+    def words_with_prefix(self, prefix):
+        matching_words = []
+        curr_level = self.root
+        for char in prefix :
+            if char not in curr_level :
+                return []
+            curr_level = curr_level[char]
+        return self.search_level(curr_level,prefix,matching_words)
+
+--------------------------------L9 : Longest Common Prefix --------------------------------
+
+def longest_common_prefix(self):
+        current = self.root
+        prefix = ''
+        while True :
+            key = list(current.keys())
+            if self.end_symbol in key :
+                break
+            if len(key) == 1 :
+                prefix += key[0]
+                current = current[key[0]]
+            else :
+                break
+        return prefix
+
+--------------------------------L10 : Advance Find Matches --------------------------------
