@@ -1,0 +1,90 @@
+14 Aug 2025
+Graphs
+
+--------------------------------L1 : Graphs --------------------------------
+
+A graph is a set of vertices and the edges that connect those vertices. 
+All trees are graphs, but not all graphs are trees.
+
+(0) ----- (1)
+|     __/ | \
+|  __/    |  (2)
+| /       | /
+(4)-------(3)
+
++---+-------+-------+-------+-------+-------+
+|   |   0   |   1   |   2   |   3   |   4   |
++---+-------+-------+-------+-------+-------+
+| 0 | False | True  | False | False | True  |
+| 1 | True  | False | True  | True  | True  |
+| 2 | False | True  | False | True  | False |
+| 3 | False | True  | True  | False | True  |
+| 4 | True  | True  | False | True  | False |
++---+-------+-------+-------+-------+-------+
+
+In Python, we can use a list of lists to represent this matrix:
+
+[
+  [False, True, False, False, True],
+  [True, False, True, True, True],
+  [False, True, False, True, False],
+  [False, True, True, False, True],
+  [True, True, False, True, False]
+]
+
+--------------------------------L2 : Graph review --------------------------------
+
++-----------------+---------+------------+
+|   Use Case      | Vertex  |    Edge    |
++-----------------+---------+------------+
+| Social Networks | User    | Connection |
+| Road Maps       | Location| Road       |
+| Networks        | Computer| Cable      |
+| Game Dev        | Tile    | Path       |
+| AI Decision     | State   | Action     |
++-----------------+---------+------------+
+
+Properties
+Graphs can have any number of vertices.
+An undirected graph can have up to n(n - 1)/2 edges for n vertices.
+Vertices can exist without edges but may be disconnected (and thus kinda useless)
+Typically graphs (with the exception of multigraphs) can only have a single edge between two vertices
+Weighted graphs assign values (costs) to edges (we'll cover this in a future course)
+
+--------------------------------L5 : Adjecency list --------------------------------
+
++---+-------+-------+-------+-------+-------+
+|   |   0   |   1   |   2   |   3   |   4   |
++---+-------+-------+-------+-------+-------+
+| 0 | False | True  | False | False | True  |
+| 1 | True  | False | True  | True  | True  |
+| 2 | False | True  | False | True  | False |
+| 3 | False | True  | True  | False | True  |
+| 4 | True  | True  | False | True  | False |
++---+-------+-------+-------+-------+-------+
+
+An adjacency list stores a list of vertices for each vertex that indicates where the connections are:
+
++---+----------------------+
+| # | Connects With        |
++---+----------------------+
+| 0 | 1, 4                 |
+| 1 | 0, 2, 3, 4           |
+| 2 | 1, 3                 |
+| 3 | 1, 2, 4              |
+| 4 | 0, 1, 3              |
++---+----------------------+
+
+--------------------------------L8 : Adjacent Nodes --------------------------------
+
+Adjacent Nodes
+It will be useful to have a helper function to get quick access to the nodes (aka vertices) in the graph that are adjacent to a given node.
+
+--------------------------------L9 : Unconected Vertices--------------------------------
+
+def unconnected_vertices(self):
+    return [vertex for vertex, connections in self.graph.items() 
+            if not connections]
+
+def unconnected_vertices(self):
+    return list(filter(lambda v: not self.graph[v], self.graph))
