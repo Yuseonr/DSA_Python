@@ -1,0 +1,59 @@
+15 Aug 2025
+BFS and DFS
+
+--------------------------------L1 : Breadth First Search (BFS) --------------------------------
+
+Breadth-first search (BFS) is an algorithm for traversing or searching tree or graph data structures. 
+It starts at a root (some arbitrary node on a graph), and explores all of the neighbor nodes at the present depth
+before going on to the nodes at the next level.
+
+Stable Sorting
+Non-integer sets are not "stable" in Python - the order of elements in a set is not guaranteed to be the same each time you iterate over it.
+While testing, we want our algorithm to search the same way every time to make debugging easier. Python offers a sorted() function we can call on our set() that will return a sorted iterable.
+
+
+--------------------------------L2 : Complete Graph --------------------------------
+
+A complete graph is a graph where every pair of vertices is connected by an edge.
+The formula for the number of edges in a complete graph is n(n - 1)/2, where n is the number of vertices.
+
+--------------------------------L4 : Depth First Search (DFS) --------------------------------
+
+Depth-first search (DFS) is just another algorithm to traverse a graph - kind of like breadth first search. 
+It starts at a root node (some arbitrary node on the graph) and explores as far as possible along each branch before 
+backtracking and starting down the next branch.
+
+--------------------------------L5 : DFS VS BFS --------------------------------
+
+So, should you use DFS or BFS when traversing a graph? Well, it depends. 
+Let's look at some rules of thumb we can use to help make the decision.
+
+Is the Solution Close to the Root?
+If you have a good reason to believe the vertex you're looking for is close to the root (where you plan to start searching) then BFS should be faster.
+
+Does the Graph Have Wide Levels?
+Imagine a tree-like graph with 10 vertices on the first level. Each of those ten vertices point to another ten vertices. The number of vertices at each level would be:
+
+level 0: 1
+level 1: 10
+level 2: 100
+level 3: 1000
+level 4: 10000
+
+Because BFS stores each horizontal level in memory at the same time, you might run out of memory. 
+DFS would likely be more memory efficient.
+
+Is the Search Space Infinite?
+In some searches, the graph has infinite size. For example, imagine a simulation of a game of chess.
+
+The first level of the graph represents all the possible current moves, the next level all the possible 2nd moves, and this goes on forever, especially when you consider that there are possible loops within the game (moving a queen back and forth).
+
+In these cases, true DFS is practically impossible, you would either be forced to:
+
+Use BFS
+Use another algorithm
+Put a limit on how far your DFS algorithm can search before returning
+
+--------------------------------L6 : DFS VS BFS --------------------------------
+
+--------------------------------L7 : DFS VS BFS --------------------------------
