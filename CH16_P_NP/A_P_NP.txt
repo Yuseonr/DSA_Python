@@ -1,0 +1,183 @@
+16 Aug 2025
+P VS NP
+
+--------------------------------L1 : NP --------------------------------
+
+Nondeterministic polynomial time, NP, is the set of problems whose solutions can be verified in polynomial time, 
+but not necessarily solved in polynomial time.
+P Is in NP
+Because all problems that can be solved in polynomial time can also be verified in polynomial time, 
+all the problems in P are also in NP.
+
+The Oracle
+A good way of thinking about problems in NP is to imagine that we have a magic oracle that gives us potential solutions to problems. 
+Here would be our process for finding if a problem is in NP:
+
+Present the problem to the magic oracle
+The magic oracle gives us a potential solution
+We verify in polynomial time that the solution is correct
+If we can do the verification in polynomial time, the problem is in NP, otherwise, it isn't.
+
+--------------------------------L3 : Traveling Salesman Problem --------------------------------
+
+Traveling Salesman Problem
+A famous example of a problem in NP is the Traveling Salesman Problem, also known as TSP.
+
+The version of the problem that we will solve can be stated:
+
+Given a list of cities, the distances between each pair of cities, and a total distance, 
+is there a path through all the cities that is less than the distance given?
+
+--------------------------------L4 : Verify TSP--------------------------------
+
+TSP takes factorial time to solve because we're forced to try every permutation of all the possible cities. 
+TSP in NP
+Although it takes factorial time to solve TSP, TSP is in NP because we can verify a solution much faster. 
+Let's write a TSP verifier!
+
+--------------------------------L5 : TSP Review --------------------------------
+
+Solving TSP
+def tsp(cities, paths, dist):
+    perms = permutations(cities)
+    for perm in perms:
+        total_dist = 0
+        for i in range(1, len(perm)):
+            total_dist += paths[perm[i - 1]][perm[i]]
+        if total_dist < dist:
+            return True
+    return False
+
+Verifying TSP
+def verify_tsp(paths, dist, actual_path):
+	total = 0
+	for i in range(len(actual_path)):
+		if i != 0:
+			total += paths[actual_path[i-1]][actual_path[i]]
+	return total < dist
+
+--------------------------------L7 : NP Complete --------------------------------
+
+NP-Complete
+Some, but not all problems in NP are also NP-complete.
+
+A problem in NP is also NP-complete if every other problem in NP can be reduced to it in polynomial time.
+A reducer is an algorithm that transforms some problem, Problem A, into a different problem which is already solved, Problem B. 
+Then, Problem A can be solved with the algorithm for solving Problem B.
+
+Problem A -> reducer -> Problem B -> solver algorithm Problem B -> solution for Problem A
+
+--------------------------------L9 : Verifying Solutions --------------------------------
+
+Even when we aren't specifically talking about P and NP, the concept of "slow to solve, fast to verify" is very important in real-world software. As a trivial example, imagine the password on an email account. When a user inputs a password like:
+
+p@ssword4Mi
+
+It's easy to verify if that password matches the one we have saved on file. It's literally as easy as:
+
+should_grant_access = user_input == saved_password
+
+--------------------------------L10 : Does P equal to NP --------------------------------
+
+The P versus NP problem is a major unsolved problem in computer science. 
+It asks whether every problem whose solution can be quickly verified (is in NP) can also be solved quickly (is in P).
+
+The question is, "Are all NP problems really just P problems?"
+
+The answer is, "We don't know, but probably not".
+
+Why Do We Care?
+All problems in NP (you know, hard ones like the traveling salesman problem) have been proven to also be solvable in polynomial time if we can find a solution to just one NP-Complete problem.
+
+If a single NP-complete problem can be solved quickly (in polynomial time) that means that all problems in NP can be solved in polynomial time. 
+That would be a huge deal, particularly because it would break digital security systems that rely on the difficulty of certain NP problems.
+
+--------------------------------L11 : Does P equal to NP --------------------------------
+
+We do not know for sure if P equals NP because we can't find any polynomial-time solutions to NP-complete problems. 
+Additionally, we have been unable to prove whether P does not equal NP. 
+We suspect P does not equal NP because it has been so difficult to prove that P = NP.
+
+In order to prove the negative case, that P != NP, we would need to exhaustively prove that there's no possible way to solve TSP in polynomial time
+
+--------------------------------L14 : NP Hard --------------------------------
+
+All NP-complete problems are NP-hard, but not all NP-hard problems are NP-complete. 
+The determining factor between NP-complete and NP-hard is that not all NP-hard problems are in NP.
+
+A problem is NP-hard if every problem in NP can be reduced into it in polynomial time.
+
+Compare this to the slightly different definition of NP-complete:
+
+A problem is NP-complete if it is in NP and every other problem in NP can be reduced into it in polynomial time.
+
+The difference is that NP-complete problems must be in NP, or in other words, they must be verifiable in polynomial time. 
+NP-hard has no such restriction.
+
+--------------------------------L15 : NP Hard --------------------------------
+
+NP-hard (very large set)
+├── NP-complete (subset of NP-hard that's also in NP)
+└── Other NP-hard problems (like Halting Problem - not in NP)
+
+NP (separate set)
+├── NP-complete (intersection with NP-hard)
+├── P (assuming P ≠ NP)
+└── Other NP problems
+
+--------------------------------L16 : Prime Factorization --------------------------------
+
+Let's solve a commonly misunderstood problem in computer science - finding the prime factors of a number. Almost all modern cryptography, including your browser's HTTPS encryption, is based on the fact that prime factorization is slow.
+
+For now, let's focus on the speed of factorization, and how it relates to P and NP.
+
+Finding a number's prime factors is an NP algorithm.
+
+When given two primes and their product, all we need to do is some simple multiplication to verify correctness. (polynomial time)
+Given a number, finding its prime factors is a much more difficult problem. Exponential time is the best we know of.
+The trouble is that no one has formally proven that there is not a polynomial time algorithm for finding prime factors. So, we're technically unsure if the problem is in P or if it's NP-complete.
+
+--------------------------------L17 : Prime Factorization review --------------------------------
+
+Analysis of the prime_factors function:
+This function finds the prime factorization of a number n. Let's analyze its complexity:
+Time Complexity:
+
+The while loop for factor 2: O(log n)
+The for loop runs up to √n: O(√n)
+Each iteration does constant work
+Overall: O(√n)
+
+Since √n is polynomial in the input size (which is log n bits), this is actually polynomial time relative to the value of n.
+Why it's in NP:
+
+Decision version: "Does n have a prime factor less than k?"
+Verification: Given a potential prime factor, you can verify it divides n in polynomial time
+Solution: The algorithm shows we can actually solve it in polynomial time
+
+Why it's likely in P:
+
+The algorithm runs in O(√n) time
+For practical purposes, this is considered efficient
+Prime factorization of small to medium numbers is tractable
+
+Important note:
+While this specific implementation can factor numbers efficiently for reasonable sizes, the general integer factorization problem (factoring very large numbers like those used in cryptography) is believed to be harder and is the basis for RSA encryption security.
+Answer: NP (and quite possibly also in P for most practical cases)
+The problem is definitely in NP because solutions can be verified quickly, and this particular algorithm suggests it may even be in P.RetryClaude can make mistakes. Please double-check responses.
+
+--------------------------------L18 : Prime Factorization review --------------------------------
+
+Prime Factoring Review
+Big O Analysis
+Let us denote n as the integer input, and s as the size of n in bits. s = log2(n)
+
+Notice that our first loop iterates log(n) times and the second loop iterates sqrt(n) times. The Big O with respect to n is O(sqrt(n))! That's fast! That's polynomial complexity which would lead us to believe the problem is in P
+
+Wait!
+The problem is that, by definition, when computer scientists talk about this problem, they are talking about the length of n in bits. What we will call s. For example, the integer 255 only takes 8 bits.
+
+241 = 11110001 in binary
+
+Since s = log2(n), a complexity of O(sqrt(n)) is equivalent to O(sqrt(2^s))
+
